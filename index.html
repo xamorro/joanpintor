@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joan Pintor - Rooftop Dodger</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Esquiva los rodillos de pintura de Joan Pintor en este emocionante juego web arcade. ¡Dibuja tu camino hacia la puntuación más alta!">
+    <meta name="keywords" content="joan pintor, juego web, arcade, esquivar, rodillos pintura, html5 canvas">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>">
+    
+    <!-- Google Fonts: Fredoka for hand-drawn look, Press Start 2P for retro touch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Game Canvas -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- HUD (Heads Up Display) Overlay -->
+        <div id="hud" class="hud-overlay hidden">
+            <div class="hud-top-left">
+                <div class="hud-item score-container">
+                    <span class="hud-label">SCORE:</span>
+                    <span id="score-val" class="hud-value">0</span>
+                </div>
+                <div class="hud-item level-container">
+                    <span class="hud-label">LEVEL:</span>
+                    <span id="level-val" class="hud-value">1</span>
+                </div>
+            </div>
+
+            <!-- Top Right: Pause and Mute controls -->
+            <div class="hud-top-right">
+                <button id="btn-mute" class="hud-btn" aria-label="Silenciar sonido">🔊</button>
+                <button id="btn-pause" class="hud-btn" aria-label="Pausar juego">⏸️</button>
+            </div>
+
+            <!-- Bottom Right: Lives indicator -->
+            <div class="hud-bottom-right">
+                <div class="dodge-bubble">DODGE!</div>
+                <div class="lives-container">
+                    <div id="player-avatar" class="avatar-icon"></div>
+                    <div class="lives-count">
+                        <span class="heart-icon">❤️</span>
+                        <span class="hud-label">LIVES:</span>
+                        <span id="lives-val" class="hud-value">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- On-Screen Controls for Mobile/Touch Devices -->
+            <div id="touch-controls" class="touch-zones">
+                <div id="zone-left" class="touch-zone" aria-label="Mover a la izquierda"></div>
+                <div id="zone-right" class="touch-zone" aria-label="Mover a la derecha"></div>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="screen-start" class="menu-screen active">
+            <div class="menu-content">
+                <div class="title-logo">
+                    <h1 class="comic-title">JOAN PINTOR</h1>
+                    <h2 class="comic-subtitle">ROOFTOP ARTIST</h2>
+                </div>
+                
+                <div class="tutorial-box">
+                    <div class="character-preview">
+                        <div class="sketch-joan"></div>
+                        <p class="sketch-tag">¡Joan te lanza rodillos!</p>
+                    </div>
+                    <div class="instructions">
+                        <h3>¿Cómo jugar?</h3>
+                        <p>Usa las teclas <strong>A / D</strong> o las <strong>Flechas Izquierda / Derecha</strong> para moverte por la calle.</p>
+                        <p class="mobile-tip">En móviles: Toca los lados izquierdo o derecho de la pantalla.</p>
+                        <p class="objective"><strong>¡Esquiva los rodillos de pintura de colores antes de que te aplasten!</strong></p>
+                    </div>
+                </div>
+
+                <div class="high-score-display">
+                    🏆 Record: <span id="high-score-val">0</span>
+                </div>
+
+                <button id="btn-start" class="btn btn-primary btn-pulse">¡EMPEZAR A JUGAR!</button>
+            </div>
+        </div>
+
+        <!-- Pause Screen -->
+        <div id="screen-pause" class="menu-screen hidden">
+            <div class="menu-content glass-panel">
+                <h2 class="menu-title">Juego Pausado</h2>
+                <div class="menu-buttons">
+                    <button id="btn-resume" class="btn btn-primary">Reanudar</button>
+                    <button id="btn-restart-pause" class="btn btn-secondary">Reiniciar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="screen-gameover" class="menu-screen hidden">
+            <div class="menu-content glass-panel animate-bounce-in">
+                <h2 class="menu-title text-danger">¡JUEGO TERMINADO!</h2>
+                
+                <div class="final-stats">
+                    <div class="stat-row">
+                        <span>Puntuación final:</span>
+                        <strong id="final-score-val" class="text-primary">0</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>Nivel alcanzado:</span>
+                        <strong id="final-level-val" class="text-warning">1</strong>
+                    </div>
+                    <div id="new-record-badge" class="new-record-flash hidden">
+                        ✨ ¡NUEVO RÉCORD! ✨
+                    </div>
+                </div>
+
+                <div class="menu-buttons">
+                    <button id="btn-restart" class="btn btn-primary btn-pulse">Volver a Jugar</button>
+                    <button id="btn-exit" class="btn btn-secondary">Menú Principal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js?v=4" defer></script>
+</body>
+</html>
+

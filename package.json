@@ -1,0 +1,16 @@
+{
+  "name": "joan-pintor",
+  "version": "1.0.0",
+  "description": "Juego web Joan Pintor - Rooftop Dodger",
+  "scripts": {
+    "start": "npx -y http-server . -o"
+  },
+  "keywords": [
+    "game",
+    "web",
+    "canvas",
+    "arcade"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}
